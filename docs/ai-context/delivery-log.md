@@ -1,0 +1,27 @@
+# Delivery log (ROI + per-feature cost)
+
+Lightweight measurement **without Dash0**. One row per feature after G5 / merge.
+**Does not block delivery.**
+
+Per-feature detail: `docs/ai-context/features/<slug>/cost-summary.json`
+
+## Cost basis (important)
+
+| Cost basis | Meaning |
+| --- | --- |
+| **measured** | `cost_usd` reported in Claude session records |
+| **estimated** | **Projected** from token counts + list prices — **not vendor billing** |
+| **mixed** | Some measured, some projected |
+| **none** | No session tokens found for the feature window |
+
+Never present **estimated** as invoiced cost. Use `display_cost` from
+`cost-summary.json`.
+
+## Log
+
+| Date | Slug | Wall time | AI cost (USD) | Cost basis | In tok | Out tok | Rework (Y/N) | Escaped (n) | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-08-12 | health-endpoint | | none | none | | | | | pre-cost-tracking; merged PR #1 |
+| 2026-08-12 | echo-greeting | | none | none | | | | | pre-cost-tracking; merged PR #2 |
+| 2026-08-13 | echo-farewell | | none | none | | | | | pre-cost-tracking; merged PR #3 |
+| 2026-08-14 | named-counter | | none | none | | | | | PR #4; cost tooling found 0 session files due to a path-encoding mismatch in feature-cost-report.mjs (looked for `...mikita.holik...`, actual Claude project dir is `...mikita-holik...`) — not fixed here, out of scope (script lives in the extensions-template repo) |

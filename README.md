@@ -73,11 +73,50 @@ curl -i http://localhost:8080/api/v1/farewells \
 }
 ```
 
+## Counter API
+
+`POST /api/v1/counters/{name}/increments` creates the named counter at `0`
+if it doesn't exist yet, then adds `1` (no request body needed).
+`GET /api/v1/counters/{name}` reads the current value. `{name}` must be
+1-40 lowercase letters, digits, or hyphens, must not start or end with a
+hyphen, and must not contain `--`. Counters are in-memory only and reset on
+restart.
+
+```
+curl -i -X POST http://localhost:8080/api/v1/counters/jobs/increments
+```
+
+```json
+{
+  "name": "jobs",
+  "value": 1,
+  "updatedAt": "2026-08-14T10:15:30.123Z"
+}
+```
+
+```
+curl -i http://localhost:8080/api/v1/counters/jobs
+```
+
+An invalid `{name}` returns `400` with the same `validation_failed` shape as
+greetings/farewells. Reading an unknown counter returns `404`:
+
+```json
+{
+  "error": "not_found",
+  "details": [
+    { "field": "name", "message": "counter does not exist" }
+  ]
+}
+```
+
 ## Request size limit
 
-Both `POST` endpoints reject request bodies larger than 4096 bytes with `413`
-before validation runs, to bound how much untrusted input the server buffers
-in memory:
+Any request with a declared `Content-Length` over 4096 bytes is rejected with
+`413` before routing/validation runs, to bound how much untrusted input the
+server buffers in memory. This applies service-wide, including the counter
+endpoints above. Only requests that declare `Content-Length` are guarded; a
+chunked request with no declared length is not capped by this filter:
 
 ```json
 {
