@@ -1,17 +1,34 @@
 {
   "slug": "named-counter",
   "started_at": "2026-08-14T10:40:50.195Z",
-  "ended_at": "2026-08-14T11:09:24.087Z",
+  "ended_at": "2026-08-14T11:33:58.593Z",
   "branch": "feature/named-counter",
-  "input_tokens": 0,
-  "output_tokens": 0,
-  "cost_usd": 0,
+  "input_tokens": 9000144,
+  "uncached_input_tokens": 132,
+  "cache_read_tokens": 8837422,
+  "cache_creation_tokens": 162590,
+  "cache_creation_5m_tokens": 0,
+  "cache_creation_1h_tokens": 162590,
+  "output_tokens": 68020,
+  "cost_usd": 4.6474626,
   "measured_usd": 0,
-  "estimated_usd": 0,
-  "cost_basis": "none",
-  "cost_basis_note": "No session token data found for this feature window.",
-  "display_cost": "none",
-  "models": [],
-  "session_files_scanned": 0,
-  "message_count": 0
+  "estimated_usd": 4.6474626,
+  "cost_basis": "estimated",
+  "cost_basis_note": "Not billed usage — projected from token counts and published list prices (cache read 0.1× input, 5m cache write 1.25×, 1h cache write 2×).",
+  "display_cost": "$4.6475 (estimated)",
+  "models": [
+    {
+      "model": "claude-sonnet-5",
+      "input_tokens": 9000144,
+      "uncached_input_tokens": 132,
+      "cache_read_tokens": 8837422,
+      "cache_creation_5m_tokens": 0,
+      "cache_creation_1h_tokens": 162590,
+      "output_tokens": 68020,
+      "measured_usd": 0,
+      "estimated_usd": 4.6474626
+    }
+  ],
+  "session_files_scanned": 5,
+  "message_count": 66
 }
