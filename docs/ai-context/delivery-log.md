@@ -24,4 +24,5 @@ Never present **estimated** as invoiced cost. Use `display_cost` from
 | 2026-08-12 | health-endpoint | | none | none | | | | | pre-cost-tracking; merged PR #1 |
 | 2026-08-12 | echo-greeting | | none | none | | | | | pre-cost-tracking; merged PR #2 |
 | 2026-08-13 | echo-farewell | | none | none | | | | | pre-cost-tracking; merged PR #3 |
-| 2026-08-14 | named-counter | | none | none | | | | | PR #4; cost tooling found 0 session files due to a path-encoding mismatch in feature-cost-report.mjs (looked for `...mikita.holik...`, actual Claude project dir is `...mikita-holik...`) — not fixed here, out of scope (script lives in the extensions-template repo) |
+| 2026-08-14 | named-counter | | none | none | | | | | PR #4; cost tooling found 0 session files due to a path-encoding mismatch in feature-cost-report.mjs (looked for `...mikita.holik...`, actual Claude project dir is `...mikita-holik...`) — not fixed here, out of scope (script lives in the extensions-template repo); a corrected recompute (~$4.65 estimated) exists uncommitted on the stale `feature/named-counter` branch, not yet applied |
+| 2026-08-14 | memo-notes | | $7.5281 (estimated) | estimated | ~18.9M (mostly cache read) | 73691 | | | PR #5; path-encoding bug above is now fixed — this is the first feature with a real cost figure. Estimated from token counts + list prices, not vendor-billed |
