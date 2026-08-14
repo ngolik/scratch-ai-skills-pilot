@@ -24,4 +24,4 @@ Never present **estimated** as invoiced cost. Use `display_cost` from
 | 2026-08-12 | health-endpoint | | none | none | | | | | pre-cost-tracking; merged PR #1 |
 | 2026-08-12 | echo-greeting | | none | none | | | | | pre-cost-tracking; merged PR #2 |
 | 2026-08-13 | echo-farewell | | none | none | | | | | pre-cost-tracking; merged PR #3 |
-| 2026-08-14 | named-counter | | none | none | | | | | PR #4; cost tooling found 0 session files due to a path-encoding mismatch in feature-cost-report.mjs (looked for `...mikita.holik...`, actual Claude project dir is `...mikita-holik...`) — not fixed here, out of scope (script lives in the extensions-template repo) |
+| 2026-08-14 | named-counter | | $4.6475 (estimated) | estimated | ~9.0M (mostly cache read) | 68020 | | | PR #4; first cost run returned `none` due to the path-encoding bug (fixed upstream since); this row reflects a corrected recompute |
