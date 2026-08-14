@@ -1,4 +1,4 @@
-package com.example.scratch.greeting;
+package com.example.scratch.farewell;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import com.example.scratch.validation.NameValidationConstants;
 
-public record GreetingRequest(
+public record FarewellRequest(
 
         @NotBlank(message = "must not be blank")
         @Size(max = NameValidationConstants.MAX_NAME_LENGTH, message = "must be at most 40 characters")
