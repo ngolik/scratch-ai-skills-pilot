@@ -110,6 +110,45 @@ greetings/farewells. Reading an unknown counter returns `404`:
 }
 ```
 
+## Toggle API
+
+`PUT /api/v1/toggles/{name}` creates the named toggle if it doesn't exist, or
+replaces its `enabled` value if it does. `GET /api/v1/toggles/{name}` reads
+the current value. `{name}` follows the same slug rules as counters (1-40
+lowercase letters, digits, or hyphens; no leading/trailing hyphen; no `--`).
+Toggles are in-memory only and reset on restart.
+
+```
+curl -i -X PUT http://localhost:8080/api/v1/toggles/dark-mode \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": true}'
+```
+
+```json
+{
+  "name": "dark-mode",
+  "enabled": true,
+  "updatedAt": "2026-08-17T10:15:30.123Z"
+}
+```
+
+```
+curl -i http://localhost:8080/api/v1/toggles/dark-mode
+```
+
+An invalid `{name}` or a missing/non-boolean `enabled` returns `400` with the
+same `validation_failed` shape as greetings/farewells/counters. Reading an
+unknown toggle returns `404` with the same `not_found` shape as counters:
+
+```json
+{
+  "error": "not_found",
+  "details": [
+    { "field": "name", "message": "toggle does not exist" }
+  ]
+}
+```
+
 ## Request size limit
 
 Any request with a declared `Content-Length` over 4096 bytes is rejected with
