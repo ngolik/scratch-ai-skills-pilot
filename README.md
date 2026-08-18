@@ -122,6 +122,19 @@ Toggles are in-memory only and reset on restart.
 curl -i -X PUT http://localhost:8080/api/v1/toggles/dark-mode \
   -H "Content-Type: application/json" \
   -d '{"enabled": true}'
+## Notes API
+
+`POST /api/v1/notes` creates a memo note; `GET /api/v1/notes/{id}` reads one
+back. `text` is required, trimmed, and must be 1-200 characters after
+trimming. `id` is a server-generated UUID (never client-supplied). Notes are
+in-memory only and reset on restart. This feature is built with a layered
+architecture (`web` / `application` / `domain` / `infrastructure`) rather
+than the single-package shape used by greetings/farewells/counters.
+
+```
+curl -i -X POST http://localhost:8080/api/v1/notes \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Ship the plugin test"}'
 ```
 
 ```json
@@ -139,12 +152,25 @@ curl -i http://localhost:8080/api/v1/toggles/dark-mode
 An invalid `{name}` or a missing/non-boolean `enabled` returns `400` with the
 same `validation_failed` shape as greetings/farewells/counters. Reading an
 unknown toggle returns `404` with the same `not_found` shape as counters:
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "text": "Ship the plugin test",
+  "createdAt": "2026-08-14T10:15:30.123Z"
+}
+```
+
+```
+curl -i http://localhost:8080/api/v1/notes/3fa85f64-5717-4562-b3fc-2c963f66afa6
+```
+
+Blank/too-long `text` or a malformed `id` return `400` with the same
+`validation_failed` shape as the other endpoints. Reading an unknown id
+returns `404`:
 
 ```json
 {
   "error": "not_found",
   "details": [
-    { "field": "name", "message": "toggle does not exist" }
+    { "field": "id", "message": "note does not exist" }
   ]
 }
 ```
