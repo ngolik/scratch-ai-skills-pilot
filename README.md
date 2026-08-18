@@ -231,6 +231,48 @@ status returns `404` with the same `not_found` shape as counters/toggles:
 }
 ```
 
+## Label API
+
+`PUT /api/v1/labels/{name}` creates the named label if it doesn't exist, or
+replaces its `value` if it does. `GET /api/v1/labels/{name}` reads the current
+value. `{name}` follows the same slug rules as counters/toggles/statuses
+(1-40 lowercase letters, digits, or hyphens; no leading/trailing hyphen; no
+`--`). `value` is required, trimmed, and must be 1-32 characters after
+trimming. Labels are in-memory only and reset on restart. Like counters, this
+feature uses a single flat package (no classic layers).
+
+```
+curl -i -X PUT http://localhost:8080/api/v1/labels/release-channel \
+  -H "Content-Type: application/json" \
+  -d '{"value": "beta"}'
+```
+
+```json
+{
+  "name": "release-channel",
+  "value": "beta",
+  "updatedAt": "2026-08-18T10:15:30.123Z"
+}
+```
+
+```
+curl -i http://localhost:8080/api/v1/labels/release-channel
+```
+
+An invalid `{name}` or a missing/blank/too-long `value` returns `400` with
+the same `validation_failed` shape as the other endpoints. Reading an unknown
+label returns `404` with the same `not_found` shape as counters/toggles/
+statuses:
+
+```json
+{
+  "error": "not_found",
+  "details": [
+    { "field": "name", "message": "label does not exist" }
+  ]
+}
+```
+
 ## Request size limit
 
 Any request with a declared `Content-Length` over 4096 bytes is rejected with
