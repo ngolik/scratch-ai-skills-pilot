@@ -19,11 +19,12 @@ Never present **estimated** as invoiced cost. Use `display_cost` from
 
 ## Log
 
-| Date | Slug | Wall time | AI cost (USD) | Cost basis | In tok | Out tok | Rework (Y/N) | Escaped (n) | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-08-12 | health-endpoint | | none | none | | | | | pre-cost-tracking; merged PR #1 |
-| 2026-08-12 | echo-greeting | | none | none | | | | | pre-cost-tracking; merged PR #2 |
-| 2026-08-13 | echo-farewell | | none | none | | | | | pre-cost-tracking; merged PR #3 |
-| 2026-08-14 | named-counter | | $4.6475 (estimated) | estimated | ~9.0M (mostly cache read) | 68020 | | | PR #4; first cost run returned `none` due to the path-encoding bug (fixed upstream since); this row reflects a corrected recompute |
-| 2026-08-14 | memo-notes | | $7.5281 (estimated) | estimated | ~18.9M (mostly cache read) | 73691 | | | PR #5; path-encoding bug above is now fixed — this is the first feature with a real cost figure. Estimated from token counts + list prices, not vendor-billed |
-| 2026-08-18 | named-status | | $3.0495 (estimated) | estimated | ~5.9M (mostly cache read) | 46692 | N | 0 | PR #9; ran end-to-end via feature-delivery-playbook (brief -> arch -> plan -> engineering -> pre-push-review, clean); fixed a pre-existing README merge-corruption bug found while adding the Status API doc section |
+| Date | Slug | Wall time | AI cost (USD) | Cost basis | Uncached tok | Cache tok | Out tok | Messages | Rework (Y/N) | Escaped (n) | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-08-12 | health-endpoint | | none | none | | | | | | | pre-cost-tracking; merged PR #1 |
+| 2026-08-12 | echo-greeting | | none | none | | | | | | | pre-cost-tracking; merged PR #2 |
+| 2026-08-13 | echo-farewell | | none | none | | | | | | | pre-cost-tracking; merged PR #3 |
+| 2026-08-14 | named-counter | | $4.6475 (estimated) | estimated | | ~9.0M (mostly cache read) | 68020 | | | | PR #4; first cost run returned `none` due to the path-encoding bug (fixed upstream since); this row reflects a corrected recompute |
+| 2026-08-14 | memo-notes | | $7.5281 (estimated) | estimated | | ~18.9M (mostly cache read) | 73691 | | | | PR #5; path-encoding bug above is now fixed — this is the first feature with a real cost figure. Estimated from token counts + list prices, not vendor-billed |
+| 2026-08-18 | named-status | | $3.0495 (estimated) | estimated | | ~5.9M (mostly cache read) | 46692 | | N | 0 | PR #9; ran end-to-end via feature-delivery-playbook (brief -> arch -> plan -> engineering -> pre-push-review, clean); fixed a pre-existing README merge-corruption bug found while adding the Status API doc section |
+| 2026-08-18 | named-label | | $2.3603 (estimated) | estimated | 75 | 4439580 | 33022 | 38 | N | 0 | PR #11; ran end-to-end via feature-delivery-playbook (brief -> arch -> plan -> engineering -> pre-push-review, clean); flat label/ package mirroring counter/, value trim/length invariant mirrors named-status's message rule |

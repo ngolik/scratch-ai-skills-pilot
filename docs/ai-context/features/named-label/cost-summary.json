@@ -1,0 +1,38 @@
+{
+  "slug": "named-label",
+  "started_at": "2026-08-18T13:11:11.448Z",
+  "ended_at": "2026-08-18T13:27:05.171Z",
+  "branch": "feature/named-label",
+  "session_id": "4e60cc8f-56f6-4f1e-9ee8-2e98f6f7bd6e",
+  "session_filter": "session",
+  "session_files_available": 8,
+  "input_tokens": 4439655,
+  "uncached_input_tokens": 75,
+  "cache_tokens": 4439580,
+  "cache_read_tokens": 4346101,
+  "cache_creation_tokens": 93479,
+  "cache_creation_5m_tokens": 0,
+  "cache_creation_1h_tokens": 93479,
+  "output_tokens": 33022,
+  "cost_usd": 2.3602593,
+  "measured_usd": 0,
+  "estimated_usd": 2.3602593,
+  "cost_basis": "estimated",
+  "cost_basis_note": "Not billed usage — projected from token counts and published list prices (cache read 0.1× input, 5m cache write 1.25×, 1h cache write 2×).",
+  "display_cost": "$2.3603 (estimated)",
+  "models": [
+    {
+      "model": "claude-sonnet-5",
+      "input_tokens": 4439655,
+      "uncached_input_tokens": 75,
+      "cache_read_tokens": 4346101,
+      "cache_creation_5m_tokens": 0,
+      "cache_creation_1h_tokens": 93479,
+      "output_tokens": 33022,
+      "measured_usd": 0,
+      "estimated_usd": 2.3602593
+    }
+  ],
+  "session_files_scanned": 1,
+  "message_count": 38
+}
