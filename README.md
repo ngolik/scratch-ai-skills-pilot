@@ -122,19 +122,6 @@ Toggles are in-memory only and reset on restart.
 curl -i -X PUT http://localhost:8080/api/v1/toggles/dark-mode \
   -H "Content-Type: application/json" \
   -d '{"enabled": true}'
-## Notes API
-
-`POST /api/v1/notes` creates a memo note; `GET /api/v1/notes/{id}` reads one
-back. `text` is required, trimmed, and must be 1-200 characters after
-trimming. `id` is a server-generated UUID (never client-supplied). Notes are
-in-memory only and reset on restart. This feature is built with a layered
-architecture (`web` / `application` / `domain` / `infrastructure`) rather
-than the single-package shape used by greetings/farewells/counters.
-
-```
-curl -i -X POST http://localhost:8080/api/v1/notes \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Ship the plugin test"}'
 ```
 
 ```json
@@ -152,6 +139,33 @@ curl -i http://localhost:8080/api/v1/toggles/dark-mode
 An invalid `{name}` or a missing/non-boolean `enabled` returns `400` with the
 same `validation_failed` shape as greetings/farewells/counters. Reading an
 unknown toggle returns `404` with the same `not_found` shape as counters:
+
+```json
+{
+  "error": "not_found",
+  "details": [
+    { "field": "name", "message": "toggle does not exist" }
+  ]
+}
+```
+
+## Notes API
+
+`POST /api/v1/notes` creates a memo note; `GET /api/v1/notes/{id}` reads one
+back. `text` is required, trimmed, and must be 1-200 characters after
+trimming. `id` is a server-generated UUID (never client-supplied). Notes are
+in-memory only and reset on restart. This feature is built with a layered
+architecture (`web` / `application` / `domain` / `infrastructure`) rather
+than the single-package shape used by greetings/farewells/counters.
+
+```
+curl -i -X POST http://localhost:8080/api/v1/notes \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Ship the plugin test"}'
+```
+
+```json
+{
   "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
   "text": "Ship the plugin test",
   "createdAt": "2026-08-14T10:15:30.123Z"
@@ -171,6 +185,48 @@ returns `404`:
   "error": "not_found",
   "details": [
     { "field": "id", "message": "note does not exist" }
+  ]
+}
+```
+
+## Status API
+
+`PUT /api/v1/statuses/{name}` creates the named status if it doesn't exist, or
+replaces its `message` value if it does. `GET /api/v1/statuses/{name}` reads
+the current value. `{name}` follows the same slug rules as counters/toggles
+(1-40 lowercase letters, digits, or hyphens; no leading/trailing hyphen; no
+`--`). `message` is required, trimmed, and must be 1-80 characters after
+trimming. Statuses are in-memory only and reset on restart. Like toggles,
+this feature uses a layered architecture
+(`controller` / `dto` / `service` / `entity` / `repository` / `config`).
+
+```
+curl -i -X PUT http://localhost:8080/api/v1/statuses/build-bot \
+  -H "Content-Type: application/json" \
+  -d '{"message": "away"}'
+```
+
+```json
+{
+  "name": "build-bot",
+  "message": "away",
+  "updatedAt": "2026-08-18T10:15:30.123Z"
+}
+```
+
+```
+curl -i http://localhost:8080/api/v1/statuses/build-bot
+```
+
+An invalid `{name}` or a missing/blank/too-long `message` returns `400` with
+the same `validation_failed` shape as the other endpoints. Reading an unknown
+status returns `404` with the same `not_found` shape as counters/toggles:
+
+```json
+{
+  "error": "not_found",
+  "details": [
+    { "field": "name", "message": "status does not exist" }
   ]
 }
 ```
