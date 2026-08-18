@@ -2,6 +2,9 @@
 
 Sandbox for trying client Claude skills end-to-end.
 
+Per-feature AI delivery cost (wall time, token usage, estimated USD) is
+tracked in [`docs/ai-context/delivery-log.md`](docs/ai-context/delivery-log.md).
+
 ## Health check
 
 Run the app:
