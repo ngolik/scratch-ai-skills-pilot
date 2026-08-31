@@ -1,0 +1,76 @@
+# Landscape for local multi-repo pilots (scratch practice hub).
+# Point Claude here: PRACTICE_HUB or PORTFOLIO_PATH.
+
+services:
+  - id: auth-service
+    kind: domain
+    repo_url: https://github.com/ngolik/auth-service.git
+    summary: Users, roles, identity. Source of truth for User.
+    ai_context: docs/ai-context/system-overview.md
+    default_involvement: when_relevant
+
+  - id: arrival-service
+    kind: domain
+    repo_url: https://github.com/ngolik/arrival-service.git
+    summary: Arrivals / inbound shipments lifecycle.
+    ai_context: docs/ai-context/system-overview.md
+    default_involvement: when_relevant
+
+  - id: expenses-service
+    kind: domain
+    repo_url: https://github.com/ngolik/expenses-service.git
+    summary: Expense records and related workflows.
+    ai_context: docs/ai-context/system-overview.md
+    default_involvement: when_relevant
+
+  - id: api-gateway
+    kind: platform
+    repo_url: https://github.com/ngolik/api-gateway.git
+    summary: Public API routing; change when external routes or aggregation change.
+    ai_context: docs/ai-context/system-overview.md
+    default_involvement: when_relevant
+
+  - id: eureka
+    kind: infra
+    repo_url: https://github.com/ngolik/eureka.git
+    summary: Netflix Eureka service registry. Rarely changed for domain stories.
+    ai_context: docs/ai-context/system-overview.md
+    default_involvement: skip
+
+integrations:
+  - from: api-gateway
+    to: auth-service
+    kind: inferred
+    note: Gateway may expose auth/user HTTP routes.
+  - from: api-gateway
+    to: arrival-service
+    kind: inferred
+    note: Gateway may expose arrival HTTP routes.
+  - from: api-gateway
+    to: expenses-service
+    kind: inferred
+    note: Gateway may expose expense HTTP routes.
+  - from: arrival-service
+    to: auth-service
+    kind: inferred
+    note: Arrival may reference user identity.
+  - from: expenses-service
+    to: auth-service
+    kind: inferred
+    note: Expenses may reference user identity.
+  - from: auth-service
+    to: eureka
+    kind: inferred
+    note: Registers with Eureka when discovery is enabled.
+  - from: arrival-service
+    to: eureka
+    kind: inferred
+    note: Registers with Eureka when discovery is enabled.
+  - from: expenses-service
+    to: eureka
+    kind: inferred
+    note: Registers with Eureka when discovery is enabled.
+  - from: api-gateway
+    to: eureka
+    kind: inferred
+    note: Gateway may resolve backends via Eureka.

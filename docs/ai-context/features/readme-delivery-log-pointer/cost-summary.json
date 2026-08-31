@@ -1,0 +1,38 @@
+{
+  "slug": "readme-delivery-log-pointer",
+  "started_at": "2026-08-18T15:55:41.951Z",
+  "ended_at": "2026-08-18T15:58:41.412Z",
+  "branch": "chore/readme-delivery-log-pointer",
+  "session_id": "374c9863-63e8-4b29-b9e1-78b35aa11eb3",
+  "session_filter": "session",
+  "session_files_available": 10,
+  "input_tokens": 945821,
+  "uncached_input_tokens": 28,
+  "cache_tokens": 945793,
+  "cache_read_tokens": 936440,
+  "cache_creation_tokens": 9353,
+  "cache_creation_5m_tokens": 0,
+  "cache_creation_1h_tokens": 9353,
+  "output_tokens": 3515,
+  "cost_usd": 0.389859,
+  "measured_usd": 0,
+  "estimated_usd": 0.389859,
+  "cost_basis": "estimated",
+  "cost_basis_note": "Not billed usage — projected from token counts and published list prices (cache read 0.1× input, 5m cache write 1.25×, 1h cache write 2×).",
+  "display_cost": "$0.3899 (estimated)",
+  "models": [
+    {
+      "model": "claude-sonnet-5",
+      "input_tokens": 945821,
+      "uncached_input_tokens": 28,
+      "cache_read_tokens": 936440,
+      "cache_creation_5m_tokens": 0,
+      "cache_creation_1h_tokens": 9353,
+      "output_tokens": 3515,
+      "measured_usd": 0,
+      "estimated_usd": 0.389859
+    }
+  ],
+  "session_files_scanned": 1,
+  "message_count": 14
+}

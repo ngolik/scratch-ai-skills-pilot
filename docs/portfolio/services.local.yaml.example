@@ -1,0 +1,23 @@
+# Machine-local overlay example (copy to services.local.yaml).
+# Paths are relative to this practice hub (scratch-ai-skills-pilot).
+
+services:
+  - id: auth-service
+    local_path: ../auth-service
+    status: available
+
+  - id: arrival-service
+    local_path: ../arrival-service
+    status: available
+
+  - id: expenses-service
+    local_path: ../expenses-service
+    status: available
+
+  - id: api-gateway
+    local_path: ../api-gateway
+    status: available
+
+  - id: eureka
+    local_path: ../eureka
+    status: available
